@@ -29,4 +29,21 @@ const getUsers = async (req, res) => {
   }
 };
 
-export { createUser, getUsers };
+const updateUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const updatedUser = await UserModel.findByIdAndUpdate(userId, req.body, {
+      new: true,
+    });
+    if (!updatedUser) {
+      return res
+        .status(404)
+        .json({ message: "User not found", success: false });
+    }
+    res.status(200).json({ message: "User updated successfully", updatedUser });
+  } catch (err) {
+    res.status(500).json({ message: "Error updating user", error: err });
+  }
+};
+
+export { createUser, getUsers, updateUser };
