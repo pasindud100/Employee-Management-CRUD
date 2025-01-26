@@ -46,4 +46,18 @@ const updateUser = async (req, res) => {
   }
 };
 
-export { createUser, getUsers, updateUser };
+const deleteUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const deletedUser = await UserModel.findByIdAndDelete(userId);
+    if (!deletedUser) {
+      return res
+        .status(404)
+        .json({ message: "User not found", success: false });
+    }
+    res.status(200).json({ message: "User deleted successfully", deletedUser });
+  } catch (err) {
+    res.status(500).json({ message: "Error deleting user", error: err });
+  }
+};
+export { createUser, getUsers, updateUser,deleteUser };
