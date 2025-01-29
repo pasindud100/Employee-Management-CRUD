@@ -16,6 +16,7 @@ function AddUser() {
   };
 
   const CloseRef = useRef();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -24,7 +25,7 @@ function AddUser() {
         "http://localhost:8080/api/create",
         value
       );
-      
+
       const response = adduser.data;
       if (response.success) {
         toast.success(response.Message);
@@ -50,7 +51,7 @@ function AddUser() {
                   aria-hidden="true"
                   ref={CloseRef}
                 >
-                  &times;
+                  &xtimes;
                 </button>
               </div>
               <div className="modal-body">
